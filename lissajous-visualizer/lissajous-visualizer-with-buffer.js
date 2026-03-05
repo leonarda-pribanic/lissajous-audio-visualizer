@@ -111,8 +111,9 @@ function draw() {
   // toggle background based on isDarkMode
   background(isDarkMode ? 0 : 255, 30);
 
-  if (showGrid) drawGrid();
-
+  if (showGrid) {
+    drawGrid();
+  }
   const cutoff = millis() - durationSec * 1000;
   buffer = buffer.filter(p => p.t > cutoff);
 
