@@ -116,6 +116,7 @@ function draw() {
   const cutoff = millis() - durationSec * 1000;
   buffer = buffer.filter(p => p.t > cutoff);
 
+  push();
   translate(width/2, height/2);
   strokeWeight(1);
 
@@ -123,16 +124,21 @@ function draw() {
     const age = millis() - p.t;
     const alpha = map(age, 0, durationSec*1000, 255, 0); // points fade
     
-    // trace color changes based on mode
-    stroke(isDarkMode ? 0 : 0, 255, 0, alpha); 
+    if (isDarkMode) {
+      stroke(255, alpha);
+    } else {
+      stroke(0, alpha);
+    }
+    
     point(p.x * 200, p.y * 200);
   }
+  pop();
 }
 
 function drawGrid() {
   push();
-  stroke(isDarkMode ? 50 : 200);
-  line(0, 0, width, 0);
+  stroke(isDarkMode ? 60 : 200);
+  strokeWeight(1);
   line(width/2, 0, width/2, height);
   line(0, height/2, width, height/2);
   pop();
